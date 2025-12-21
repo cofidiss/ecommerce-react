@@ -6,10 +6,19 @@ import AppContext from "../Contexts/AppContext";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import Navbar from "../components/Navbar/Navbar";
-import { Backdrop, Box, CircularProgress, CssBaseline, ThemeProvider } from "@mui/material";
+import { Backdrop, Box, CircularProgress, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import CustomModal from "../components/CustomModal/CustomModal";
 
-export const AppProvider: React.FC<PropsWithChildren> = ({ children }) => {
+const theme = createTheme({
+  palette: {
+    background: {
+      default: '#f0f2f5', // Arka plan rengi
+    },
+  },
+});
+
+
+ const AppProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const baseUrl = import.meta.env.VITE_API_BASE_URL;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loadingCount, setLoadingCount] = useState(0);
@@ -163,3 +172,5 @@ export const AppProvider: React.FC<PropsWithChildren> = ({ children }) => {
     </LocalizationProvider>
   );
 };
+
+export default AppProvider;
