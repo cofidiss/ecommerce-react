@@ -38,3 +38,17 @@ export type globalCss = {
   componentBackgroundColor: string;
 };
 
+export type SignUpFormState = {
+  username: string;
+  password: string;
+  confirmPassword: string;
+  address: string;
+  phone: string;
+  error: string;
+  roleId?: number;
+};
+
+export type SignUpFormAction =
+  | { type: 'SET_FIELD'; field: string; value: string }
+  | { type: 'SET_ERROR'; error: string }
+  | { type: 'CLEAR_ERROR' };
