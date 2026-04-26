@@ -2,7 +2,6 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-<<<<<<< HEAD
 import { Box, Button } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login/Login';
@@ -34,14 +33,6 @@ function App() {
     }
   };
 
-=======
-import { Box } from '@mui/material';
-import { Route, Routes } from 'react-router-dom';
-import Login from './components/Login/Login';
-import SignUp from './components/SignUp/SignUp';
-
-function App() { console.log('App renderer');
->>>>>>> ed09a1dc983c243709c28654a088996fc18903e4
   return (
 <Box
   bgcolor={"white"}
@@ -51,7 +42,6 @@ function App() { console.log('App renderer');
     m: 2, // Dış boşluk
     p: 2, // İç boşluk
     transition: 'box-shadow 0.3s', // Smooth geçiş
-<<<<<<< HEAD
     minHeight: '100vh', 
     minWidth: '100%', // Ekran genişliğini kapla
   }}
@@ -63,13 +53,6 @@ function App() { console.log('App renderer');
       <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />   
                 <Route path="/filter" element={<FilterProductComponent />} /> 
-=======
-  }}
->
-  <Routes>
-      <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />   
->>>>>>> ed09a1dc983c243709c28654a088996fc18903e4
   </Routes>
 </Box>
 

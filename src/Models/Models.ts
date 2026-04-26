@@ -52,7 +52,6 @@ export type SignUpFormAction =
   | { type: 'SET_FIELD'; field: string; value: string }
   | { type: 'SET_ERROR'; error: string }
   | { type: 'CLEAR_ERROR' };
-<<<<<<< HEAD
 
 export type FilterProductState = {
   name: string;
@@ -65,5 +64,3 @@ export type CategoryLov = {
   id: number;
   name: string;
 };
-=======
->>>>>>> ed09a1dc983c243709c28654a088996fc18903e4
