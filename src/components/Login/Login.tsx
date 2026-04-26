@@ -14,8 +14,11 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import  AppContext  from '../../Contexts/AppContext';
 import '../../styles/global.css';
+<<<<<<< HEAD
 import { Client } from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
+=======
+>>>>>>> ed09a1dc983c243709c28654a088996fc18903e4
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -29,6 +32,7 @@ const Login: React.FC = () => {
   const handlePasswordVisibilityToggle = () => {
     setShowPassword((prevShow) => !prevShow);
   };
+<<<<<<< HEAD
 
 
   
@@ -61,6 +65,8 @@ const Login: React.FC = () => {
 
 
 
+=======
+>>>>>>> ed09a1dc983c243709c28654a088996fc18903e4
   const getUserRole = () => {
     startLoading();
     setError('');
@@ -96,6 +102,7 @@ const Login: React.FC = () => {
       body: JSON.stringify({ username, password }),
     })
       .then((response) => {
+<<<<<<< HEAD
              debugger;
         if (response.ok) {
           console.log('Giriş başarılı');
@@ -104,6 +111,10 @@ const Login: React.FC = () => {
             debugger;
             testWs(token);
           });
+=======
+        if (response.ok) {
+          console.log('Giriş başarılı');
+>>>>>>> ed09a1dc983c243709c28654a088996fc18903e4
           setIsLoggedIn(true);
           navigate('/');
         } else {
