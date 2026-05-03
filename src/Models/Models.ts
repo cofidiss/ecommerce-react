@@ -64,3 +64,11 @@ export type CategoryLov = {
   id: number;
   name: string;
 };
+
+
+export type FilteredProduct = {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+}
