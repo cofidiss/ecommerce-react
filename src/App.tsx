@@ -6,7 +6,7 @@ import { Box, Button } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
-import FilterProductComponent from './components/FilterProductBox/FilterProductBox';
+import FilterProductComponent from './components/FilterProduct/FilterProduct';
 
 
 function App() { 
