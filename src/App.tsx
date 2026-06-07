@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import FilterProductComponent from './components/FilterProduct/FilterProduct';
+import Basket from './components/Basket/Basket';
 
 
 function App() { 
@@ -52,7 +53,8 @@ function App() {
   <Routes>
       <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />   
-                <Route path="/filter" element={<FilterProductComponent />} /> 
+                <Route path="/" element={<FilterProductComponent />} /> 
+                     <Route path="/basket" element={<Basket />} /> 
   </Routes>
 </Box>
 

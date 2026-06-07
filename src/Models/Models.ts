@@ -72,3 +72,9 @@ export type FilteredProduct = {
   price: number;
   quantity: number;
 }
+
+export type BasketItem = {
+  productId:  number;
+  quantity: number;
+  totalPrice: number;
+};

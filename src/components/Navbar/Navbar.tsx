@@ -11,6 +11,7 @@ import {
   ExitToApp as ExitToAppIcon,
   List as ListIcon,
   Add as AddIcon,
+  ShoppingCart as ShoppingCartIcon,
 } from "@mui/icons-material";
 
 import {
@@ -24,8 +25,7 @@ import {
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
-  const { setIsLoggedIn, isLoggedIn, userRoles, setUserRoles } =
-    useContext(AppContext);
+  const { setIsLoggedIn, isLoggedIn, userRoles } = useContext(AppContext);
   const [settingsAnchorEl, setSettingsAnchorEl] = useState<null | HTMLElement>(
     null
   );
@@ -35,6 +35,7 @@ const Navbar: React.FC = () => {
   const [reportAnchorEl, setReportAnchorEl] = useState<null | HTMLElement>(
     null
   );
+
   setIsLoggedIn(true); // Temporary fix for testing, remove later
   // Settings menu handlers
   const handleSettingsOpen = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -53,6 +54,12 @@ const Navbar: React.FC = () => {
     setReportAnchorEl(event.currentTarget);
   };
   const handleReportClose = () => setReportAnchorEl(null);
+
+
+
+  const handleBasketViewClick = () => {
+    navigate("/basket");
+     };
 
   const handleProfileClick = () => {
     navigate("/profile");
@@ -227,7 +234,7 @@ const Navbar: React.FC = () => {
        
         {isLoggedIn ? (
           <>
-            {/* Settings Icon with Dropdown Menu */}
+             {/* Settings Icon with Dropdown Menu */}
             <div
               onMouseEnter={handleSettingsOpen}
               onMouseLeave={handleSettingsClose}
@@ -271,12 +278,15 @@ const Navbar: React.FC = () => {
                   },
                 }}
               >
+                   <MenuItem onClick={handleBasketViewClick}>
+                  <ShoppingCartIcon sx={{ marginRight: "10px" }} /> Basket
+                </MenuItem>
                 <MenuItem onClick={handleProfileClick}>
                   <AccountCircleIcon sx={{ marginRight: "10px" }} /> Profile
                 </MenuItem>
                 <MenuItem onClick={handleLogoutClick}>
                   <ExitToAppIcon sx={{ marginRight: "10px" }} /> Log Out
-                </MenuItem>
+                </MenuItem>                
               </Menu>
             </div>
           </>

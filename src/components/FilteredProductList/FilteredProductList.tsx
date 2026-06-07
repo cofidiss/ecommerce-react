@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FilteredProduct } from '../../Models/Models';
 import {
   Table,
@@ -13,11 +13,36 @@ import {
   Typography,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import AppContext from '../../Contexts/AppContext';
 
 const FilteredProductList: React.FC<{ filteredProducts: FilteredProduct[] }> = ({ filteredProducts }) => {
-
+  const { startLoading, stopLoading, setIsLoggedIn } = useContext(AppContext);
+      const baseUrl = import.meta.env.VITE_APP_BASE_URL;
     const addToBasket = (productId: number) => {
-        throw new Error('Function not implemented.');
+   startLoading();
+
+
+    fetch(`${baseUrl}/api/basket/addBasket`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ productId: productId, quantity: 1 }),
+    })
+      .then((response) => {
+             debugger;
+        if (response.ok) {
+  
+        } else {
+
+        }
+      })
+      .catch(() => {
+
+      })
+      .finally(() => {
+        stopLoading();
+      });
     }
 
   if (filteredProducts.length === 0) {

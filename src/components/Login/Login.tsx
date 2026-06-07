@@ -102,6 +102,7 @@ const Login: React.FC = () => {
           response.text().then(data => {
             const token = data;
             debugger;
+            localStorage.setItem('token', token);
             testWs(token);
           });
           setIsLoggedIn(true);
