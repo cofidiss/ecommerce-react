@@ -32,6 +32,7 @@ const Login: React.FC = () => {
 
 
   
+  
   const testWs = (token: string) => {
     // build ws(s) url from baseUrl
     const wsUrl = baseUrl.replace(/^http/, 'ws') + '/ws';
@@ -99,12 +100,7 @@ const Login: React.FC = () => {
              debugger;
         if (response.ok) {
           console.log('Giriş başarılı');
-          response.text().then(data => {
-            const token = data;
-            debugger;
-            localStorage.setItem('token', token);
-            testWs(token);
-          });
+
           setIsLoggedIn(true);
           navigate('/');
         } else {

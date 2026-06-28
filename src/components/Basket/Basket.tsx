@@ -75,6 +75,50 @@ const Basket: FC = ( ) => {
 useEffect(() => {
   getBasket();
 }, []);
+
+const handleOrder = () => {
+ startLoading();
+  const jwt = document.cookie.split('; ').find(row => row.startsWith('JWT='))?.split('=')[1];
+  
+    fetch(`${baseUrl}/api/order/createOrder`, {
+      method: 'POST'
+    })
+      .then((response) => {
+        if (response.ok) {
+          setModal1State({
+            isOpen: true,
+            title: 'Success',
+            message: 'Order created successfully!',
+            okButtonText: 'OK',
+            okButtonClick: () => {
+              setModal1State({ isOpen: false });
+              getBasket();
+            },
+          });
+        } else {
+          return response.text().then((errorText) => setModal1State({
+            isOpen: true,
+            title: 'Error',
+            message: errorText || 'Failed to create order. Please try again later.',
+            okButtonText: 'OK',
+            okButtonClick: () => setModal1State({ isOpen: false }),
+          }));
+        }
+      })
+      .catch(() => {
+        setModal1State({
+          isOpen: true,
+          title: 'Error',
+          message: 'Failed to create order. Please try again later.',
+          okButtonText: 'OK',
+          okButtonClick: () => setModal1State({ isOpen: false }),
+        });
+      })
+      .finally(() => {
+          stopLoading();
+      });
+};
+
   if (!basketItems?.length) {
     return (
       <div className={styles.basketEmpty}>
@@ -118,6 +162,13 @@ useEffect(() => {
           ))}
         </tbody>
       </table>
+      <button
+        type="button"
+        onClick={handleOrder}
+        className={styles.orderButton}
+      >
+        Order
+      </button>
     </div>
   );
 };

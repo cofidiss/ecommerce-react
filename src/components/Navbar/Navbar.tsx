@@ -36,8 +36,7 @@ const Navbar: React.FC = () => {
     null
   );
 
-  setIsLoggedIn(true); // Temporary fix for testing, remove later
-  // Settings menu handlers
+
   const handleSettingsOpen = (event: React.MouseEvent<HTMLDivElement>) => {
     setSettingsAnchorEl(event.currentTarget);
   };
@@ -67,9 +66,12 @@ const Navbar: React.FC = () => {
   };
 
   const handleLogoutClick = () => {
-    localStorage.removeItem("JWT");
+   
+    fetch(`${import.meta.env.VITE_APP_BASE_URL}/api/user/logout`, {
+      method: "POST",
+    });
     setIsLoggedIn(false);
-    navigate("/login");
+    // navigate("/login");
     handleSettingsClose();
   };
 

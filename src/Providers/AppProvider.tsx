@@ -1,4 +1,4 @@
-import { useEffect, useState, type PropsWithChildren } from "react";
+import { useEffect, useRef, useState, type PropsWithChildren } from "react";
 import type { CustomModalProps, UserRole } from "../Models/Models";
 import AppContext from "../Contexts/AppContext";
 
@@ -8,6 +8,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import Navbar from "../components/Navbar/Navbar";
 import { Backdrop, Box, CircularProgress, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import CustomModal from "../components/CustomModal/CustomModal";
+import { initWebSocket } from "../services/websocketService";
+import { Client } from "@stomp/stompjs";
+import { IsLoggedIn } from "../services/authService";
 
 const theme = createTheme({
   palette: {
@@ -23,6 +26,8 @@ const theme = createTheme({
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loadingCount, setLoadingCount] = useState(0);
   const [userRoles, setUserRoles] = useState<UserRole[]>([]); 
+
+  const socketRef = useRef<Client | null>(null);
 
   const [modal1State, setModal1State] = useState<CustomModalProps>({
     isOpen: false,
@@ -63,37 +68,21 @@ const theme = createTheme({
 
   useEffect(() => {
     console.log('isLoggedIn' + isLoggedIn);
-    if (!isLoggedIn) {
-      setUserRoles([]);
-      return;
+   if(isLoggedIn){
+  socketRef.current = initWebSocket(setModal2State);
     }
-    var response = startLoading();
-    fetch(`${baseUrl}/api/user/getUserRole`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log('getUserRole başarılı');
-          return response.json().then((data) => { 
-     const  roles : UserRole[]  = [];
-            data.forEach((item: any, index: any) => roles.push(Number(item) as UserRole));
-            setUserRoles(roles);
-          });
-        }
-      })
-      .catch((e) => {
-        console.log('getUserRole başarıosız ' + e);
-      })
-      .finally(() => {
-        stopLoading();
-      });
+   else {
+    socketRef.current?.deactivate();
+   }
+    return () => {
+      socketRef.current?.deactivate();
+    }
+
   }, [isLoggedIn]);
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem('JWT') != null;
-    setIsLoggedIn(isAuthenticated);
+    IsLoggedIn(baseUrl).then((isAuthenticated) => {
+      setIsLoggedIn(isAuthenticated);
+    });
   }, []);
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
