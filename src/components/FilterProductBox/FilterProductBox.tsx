@@ -92,6 +92,7 @@ const FilterProductBox: React.FC<{ setFilteredProducts: React.Dispatch<React.Set
 
   const handleClear = () => {
     dispatch({ type: 'RESET' });
+    handleFilter();
   };
 
   const handlePriceChange = (_event: Event, newValue: number | number[]) => {

@@ -60,11 +60,11 @@ const FilteredProductList: React.FC<{ filteredProducts: FilteredProduct[] }> = (
       <Table>
         <TableHead sx={{ backgroundColor: '#f5f5f5' }}>
           <TableRow>
-            <TableCell align="center" sx={{ fontWeight: 'bold' }}>İşlem</TableCell>
+            <TableCell align="center" sx={{ fontWeight: 'bold' }}>Action</TableCell>
             <TableCell sx={{ fontWeight: 'bold' }}>ID</TableCell>
-            <TableCell sx={{ fontWeight: 'bold' }}>Ürün Adı</TableCell>
-            <TableCell align="right" sx={{ fontWeight: 'bold' }}>Fiyat</TableCell>
-            <TableCell align="right" sx={{ fontWeight: 'bold' }}>Miktar</TableCell>
+            <TableCell sx={{ fontWeight: 'bold' }}>Product Name</TableCell>
+            <TableCell align="right" sx={{ fontWeight: 'bold' }}>Price</TableCell>
+            <TableCell align="right" sx={{ fontWeight: 'bold' }}>Quantity</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -78,7 +78,7 @@ const FilteredProductList: React.FC<{ filteredProducts: FilteredProduct[] }> = (
                   onClick={() => addToBasket(product.id)}
                   sx={{ textTransform: 'none' }}
                 >
-                  Ekle
+                  Add to Basket
                 </Button>
               </TableCell>
               <TableCell>{product.id}</TableCell>

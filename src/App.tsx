@@ -47,9 +47,6 @@ function App() {
     minWidth: '100%', // Ekran genişliğini kapla
   }}
 >
-  <Button variant="contained" onClick={handleGetBasket} sx={{ mb: 2 }}>
-    Get Basket
-  </Button>
   <Routes>
       <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />   
