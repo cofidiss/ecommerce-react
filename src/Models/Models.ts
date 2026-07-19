@@ -73,8 +73,31 @@ export type FilteredProduct = {
   quantity: number;
 }
 
+export type OrderFilterState = {
+  userId: string;
+  minAmount: string;
+  maxAmount: string;
+};
+
+export type OrderItem = {
+  id: number;
+  userId: number;
+  amount: number;
+  status: string;
+};
+
 export type BasketItem = {
   productId:  number;
   quantity: number;
   totalPrice: number;
 };
+export type OrderFilterAction =
+  | { type: 'SET_USER_ID'; payload: string }
+  | { type: 'SET_MIN_AMOUNT'; payload: string }
+  | { type: 'SET_MAX_AMOUNT'; payload: string }
+  | { type: 'RESET' };
+export type FilteredOrder = {
+  orderId: number;
+  userName: string; 
+  orderAmount: number;
+}

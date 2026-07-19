@@ -16,7 +16,7 @@ import AddIcon from '@mui/icons-material/Add';
 import AppContext from '../../Contexts/AppContext';
 
 const FilteredProductList: React.FC<{ filteredProducts: FilteredProduct[] }> = ({ filteredProducts }) => {
-  const { startLoading, stopLoading, setIsLoggedIn } = useContext(AppContext);
+  const { startLoading, stopLoading } = useContext(AppContext);
       const baseUrl = import.meta.env.VITE_APP_BASE_URL;
     const addToBasket = (productId: number) => {
    startLoading();

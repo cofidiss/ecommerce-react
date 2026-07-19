@@ -7,7 +7,7 @@ import AppContext from "../../Contexts/AppContext";
 const Basket: FC = ( ) => {
   const [basketItems, setBasketItems] = useState<BasketItem[]>([]);
   const baseUrl = import.meta.env.VITE_APP_BASE_URL;
-  const { startLoading, stopLoading, setIsLoggedIn ,setModal1State} = useContext(AppContext);
+  const { startLoading, stopLoading, setModal1State } = useContext(AppContext);
   const getBasket = async () => {
     try {
       startLoading();
@@ -78,9 +78,7 @@ useEffect(() => {
 
 const handleOrder = () => {
  startLoading();
-  const jwt = document.cookie.split('; ').find(row => row.startsWith('JWT='))?.split('=')[1];
-  
-    fetch(`${baseUrl}/api/order/createOrder`, {
+  fetch(`${baseUrl}/api/order/createOrder`, {
       method: 'POST'
     })
       .then((response) => {

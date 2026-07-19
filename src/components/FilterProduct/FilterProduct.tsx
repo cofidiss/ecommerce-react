@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import { useState } from 'react';
 import FilterProductbox from '../FilterProductBox/FilterProductBox';
 import FilterProductList from '../FilteredProductList/FilteredProductList';
 import { FilteredProduct } from '../../Models/Models';

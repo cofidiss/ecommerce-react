@@ -1,12 +1,12 @@
 import React from "react";
-import type { AppContextType, CustomModalProps } from "../Models/Models";
+import type { AppContextType } from "../Models/Models";
 
 const AppContext = React.createContext<AppContextType>({
   loading: false,
   startLoading: () => {},
   stopLoading: () => {},
-  setModal1State: (modalProps: Omit<CustomModalProps, 'onClose'>) => {},
-  setModal2State: (modalProps: Omit<CustomModalProps, 'onClose'>) => {},
+  setModal1State: () => {},
+  setModal2State: () => {},
   refreshNavbar: () => {},
   setIsLoggedIn: () => {},
   isLoggedIn: false,

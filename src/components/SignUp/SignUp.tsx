@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer, useState } from 'react';
+import React, { useContext, useReducer, useState } from 'react';
 import {
   Button,
   TextField,
@@ -69,7 +69,7 @@ const Signup: React.FC = () => {
     setShowPassword((prevShow) => !prevShow);
   };
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = () => {
     if (state.password !== state.confirmPassword) {
       dispatch({ type: 'SET_ERROR', error: 'Passwords do not match!' });
     } else {

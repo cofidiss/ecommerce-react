@@ -14,8 +14,6 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import  AppContext  from '../../Contexts/AppContext';
 import '../../styles/global.css';
-import { Client } from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -33,58 +31,6 @@ const Login: React.FC = () => {
 
   
   
-  const testWs = (token: string) => {
-    // build ws(s) url from baseUrl
-    const wsUrl = baseUrl.replace(/^http/, 'ws') + '/ws';
-
-    const client = new Client({
-      brokerURL: wsUrl,
-      reconnectDelay: 5000,
-      connectHeaders: {
-        token: token,
-      },
-      onConnect: () => {
-        console.log('Connected');
-        client.subscribe('/user/queue/test', (msg) => {
-          console.log('/user/queue/test:', msg.body);
-        });
-        client.subscribe('/queue/test', (msg) => {
-          console.log('queue/tes:', msg.body);
-        });
-      },
-    });
-
-    client.activate();
-
-    return () => client.deactivate();
-  }
-
-
-
-
-  const getUserRole = () => {
-    startLoading();
-    setError('');
-
-    fetch(`${baseUrl}/api/user/getUserRoles`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-        } else {
-          return response.text().then(() => setError('Login is unsuccessful.'));
-        }
-      })
-      .catch(() => {
-        setError('Login is unsuccessful.');
-      })
-      .finally(() => {
-        stopLoading();
-      });
-  };
   const handleLogin = () => {
     startLoading();
     setError('');

@@ -49,7 +49,7 @@ function filterReducer(state: FilterState, action: FilterAction): FilterState {
 const FilterProductBox: React.FC<{ setFilteredProducts: React.Dispatch<React.SetStateAction<FilteredProduct[]>> }> = ({ setFilteredProducts }) => {
   const [state, dispatch] = useReducer(filterReducer, initialState);
   const [categories, setCategories] = useState<CategoryLov[]>([]);
-  const { startLoading, stopLoading, setIsLoggedIn } = useContext(AppContext);
+  const { startLoading, stopLoading } = useContext(AppContext);
   const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 
   useEffect(() => {
