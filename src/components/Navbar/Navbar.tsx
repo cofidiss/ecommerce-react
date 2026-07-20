@@ -6,10 +6,10 @@ import {
   Settings as SettingsIcon,
   Login as LoginIcon,
   PersonAdd as PersonAddIcon,
-  AccountCircle as AccountCircleIcon,
   ExitToApp as ExitToAppIcon,
   List as ListIcon,
   ShoppingCart as ShoppingCartIcon,
+  Inventory2 as Inventory2Icon,
 } from "@mui/icons-material";
 
 import {
@@ -38,10 +38,7 @@ const Navbar: React.FC = () => {
     navigate("/basket");
      };
 
-  const handleProfileClick = () => {
-    navigate("/profile");
-    handleSettingsClose();
-  };
+;
 
   const handleLogoutClick = () => {
    
@@ -49,7 +46,7 @@ const Navbar: React.FC = () => {
       method: "POST",
     });
     setIsLoggedIn(false);
-    // navigate("/login");
+   navigate("/login");
     handleSettingsClose();
   };
 
@@ -58,34 +55,56 @@ const Navbar: React.FC = () => {
     handleSettingsClose();
   };
 
-  
-
+  const handleProductListClick = () => {
+    navigate("/products");
+    handleSettingsClose();
+  };
 
   return (
     <AppBar
       position="static"
-      sx={{ backgroundColor: "rgba(17, 112, 221, 0.5)" }}
+      sx={{ backgroundColor: "rgba(211, 47, 47, 0.95)", boxShadow: '0 4px 20px rgba(0,0,0,0.2)' }}
     >
       <Toolbar>
-        {true && (
-          <Button
-            color="inherit"
-            onClick={handleOrderListClick}
-            startIcon={<ListIcon />}
-            sx={{
-              borderRadius: "10px",
-              padding: "5px 12px",
-              minWidth: "140px",
-              marginRight: 2,
-              "&:hover": {
-                border: "2px solid white",
-                borderRadius: "4px",
-                transform: "scale(1.05)",
-              },
-            }}
-          >
-            Order List
-          </Button>
+        {isLoggedIn && (
+          <>
+            <Button
+              color="inherit"
+              onClick={handleOrderListClick}
+              startIcon={<ListIcon />}
+              sx={{
+                borderRadius: "10px",
+                padding: "5px 12px",
+                minWidth: "140px",
+                marginRight: 2,
+                "&:hover": {
+                  border: "2px solid white",
+                  borderRadius: "4px",
+                  transform: "scale(1.05)",
+                },
+              }}
+            >
+              Order List
+            </Button>
+            <Button
+              color="inherit"
+              onClick={handleProductListClick}
+              startIcon={<Inventory2Icon />}
+              sx={{
+                borderRadius: "10px",
+                padding: "5px 12px",
+                minWidth: "140px",
+                marginRight: 2,
+                "&:hover": {
+                  border: "2px solid white",
+                  borderRadius: "4px",
+                  transform: "scale(1.05)",
+                },
+              }}
+            >
+              Product List
+            </Button>
+          </>
         )}
 
 
@@ -141,10 +160,7 @@ const Navbar: React.FC = () => {
               >
                    <MenuItem onClick={handleBasketViewClick}>
                   <ShoppingCartIcon sx={{ marginRight: "10px" }} /> Basket
-                </MenuItem>
-                <MenuItem onClick={handleProfileClick}>
-                  <AccountCircleIcon sx={{ marginRight: "10px" }} /> Profile
-                </MenuItem>
+                </MenuItem>            
                 <MenuItem onClick={handleLogoutClick}>
                   <ExitToAppIcon sx={{ marginRight: "10px" }} /> Log Out
                 </MenuItem>                

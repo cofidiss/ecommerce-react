@@ -37,10 +37,12 @@ const Signup: React.FC = () => {
   const baseUrl = import.meta.env.VITE_APP_BASE_URL;
   const { startLoading, stopLoading, setIsLoggedIn } = useContext(AppContext);
  
-  const roleLov = Object.entries(UserRole).map(([key, value]) => ({
-    id: value,
-    name: key
-  }));
+  const roleLov = Object.entries(UserRole)
+    .filter(([key]) => Number.isNaN(Number(key)))
+    .map(([key, value]) => ({
+      id: value as number,
+      name: key,
+    }));
   function formReducer(
     state: SignUpFormState,
     action: SignUpFormAction,

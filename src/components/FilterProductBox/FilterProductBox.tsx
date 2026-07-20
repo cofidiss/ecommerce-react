@@ -5,7 +5,6 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  Slider,
   Button,
   Box,
   Typography,
@@ -25,7 +24,7 @@ type FilterAction =
 const initialState: FilterState = {
   name: '',
   minPrice: 0,
-  maxPrice: 1000,
+  maxPrice: 0,
   categoryId: 0,
 };
 
@@ -67,6 +66,7 @@ const FilterProductBox: React.FC<{ setFilteredProducts: React.Dispatch<React.Set
       }
     };
     fetchCategories();
+    handleFilter();
   }, []);
 
   const handleFilter = async () => {
@@ -93,13 +93,6 @@ const FilterProductBox: React.FC<{ setFilteredProducts: React.Dispatch<React.Set
   const handleClear = () => {
     dispatch({ type: 'RESET' });
     handleFilter();
-  };
-
-  const handlePriceChange = (_event: Event, newValue: number | number[]) => {
-    if (Array.isArray(newValue)) {
-      dispatch({ type: 'SET_MIN_PRICE', payload: newValue[0] });
-      dispatch({ type: 'SET_MAX_PRICE', payload: newValue[1] });
-    }
   };
 
   return (
@@ -129,20 +122,21 @@ const FilterProductBox: React.FC<{ setFilteredProducts: React.Dispatch<React.Set
               ))}
             </Select>
           </FormControl>
-          <Box sx={{ minWidth: 300 }}>
-            <Typography gutterBottom>Price Range</Typography>
-            <Slider
-              value={[state.minPrice, state.maxPrice]}
-              onChange={handlePriceChange}
-              valueLabelDisplay="auto"
-              min={0}
-              max={1000}
-              step={10}
+          <Box sx={{ display: 'flex', gap: 2, minWidth: 300 }}>
+            <TextField
+              label="Min Price"
+              type="number"
+              value={state.minPrice}
+              onChange={(e) => dispatch({ type: 'SET_MIN_PRICE', payload: Number(e.target.value) })}
+              sx={{ minWidth: 140 }}
             />
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Typography variant="body2">Min: ${state.minPrice}</Typography>
-              <Typography variant="body2">Max: ${state.maxPrice}</Typography>
-            </Box>
+            <TextField
+              label="Max Price"
+              type="number"
+              value={state.maxPrice}
+              onChange={(e) => dispatch({ type: 'SET_MAX_PRICE', payload: Number(e.target.value) })}
+              sx={{ minWidth: 140 }}
+            />
           </Box>
         </Box>
         <Box sx={{ display: 'flex', gap: 2, justifyContent: 'flex-end' }}>

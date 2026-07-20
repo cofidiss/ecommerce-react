@@ -29,9 +29,8 @@ export type CustomModalProps= {
   children?: ReactNode;
 }
 export enum UserRole {
-  read,
-  write,
-  delete
+  Admin = 1,
+  StandardUser = 0
 }
 
 export type globalCss = {
@@ -101,3 +100,16 @@ export type FilteredOrder = {
   userName: string; 
   orderAmount: number;
 }
+
+export type UserLov = {
+  id: number;
+  name: string;
+};
+
+export type OrderDetails = {
+  id: number;
+  userName: string;
+  productId: number;
+  quantity: string;
+  amount: number;
+};

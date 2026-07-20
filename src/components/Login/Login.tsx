@@ -5,8 +5,6 @@ import {
   TextField,
   Button,
   Typography,
-  Grid,
-  Link,
   IconButton,
   InputAdornment,
 } from '@mui/material';
@@ -116,13 +114,6 @@ const Login: React.FC = () => {
         >
           Login
         </Button>
-        <Grid container justifyContent="flex-end" sx={{ mt: 2 }}>
-          <Grid >
-            <Link href="#" variant="body2">
-              Forgot password?
-            </Link>
-          </Grid>
-        </Grid>
       </Box>
     </Container>
   );

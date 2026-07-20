@@ -1,4 +1,5 @@
 ﻿import { useContext, useEffect, useState, type FC } from "react";
+import { useNavigate } from "react-router-dom";
 import { BasketItem } from "../../Models/Models";
 import styles from "./Basket.module.css";
 import AppContext from "../../Contexts/AppContext";
@@ -8,6 +9,7 @@ const Basket: FC = ( ) => {
   const [basketItems, setBasketItems] = useState<BasketItem[]>([]);
   const baseUrl = import.meta.env.VITE_APP_BASE_URL;
   const { startLoading, stopLoading, setModal1State } = useContext(AppContext);
+  const navigate = useNavigate();
   const getBasket = async () => {
     try {
       startLoading();
@@ -90,7 +92,7 @@ const handleOrder = () => {
             okButtonText: 'OK',
             okButtonClick: () => {
               setModal1State({ isOpen: false });
-              getBasket();
+              navigate('/orders'); 
             },
           });
         } else {

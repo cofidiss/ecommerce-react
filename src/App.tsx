@@ -6,6 +6,7 @@ import SignUp from './components/SignUp/SignUp';
 import FilterProductComponent from './components/FilterProduct/FilterProduct';
 import Basket from './components/Basket/Basket';
 import FilterOrder from './components/Order/FilterOrder';
+import Welcome from './components/Welcome/Welcome';
 
 function App() {
   return (
@@ -24,10 +25,10 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/" element={<FilterProductComponent />} />
+        <Route path="/products" element={<FilterProductComponent />} />
         <Route path="/basket" element={<Basket />} />
-        <Route path="/orders" element={<FilterOrder />} />     
-        <Route path="*" element={<h1>404 Not Found</h1>} />
+        <Route path="/orders" element={<FilterOrder />} />
+        <Route path="*" element={<Welcome />} />
       </Routes>
     </Box>
   );

@@ -1,3 +1,18 @@
 :root {
   --component-background-color: #3498db;
+  --table-header-bg: #ac1111;
+  --table-header-color: #fffbfb;
+}
+
+table th,
+table td {
+  text-align: center !important;
+}
+
+table thead th,
+table thead td {
+  background-color: var(--table-header-bg) !important;
+  color: var(--table-header-color) !important;
+  font-weight: 700;
+  text-transform: uppercase;
 }
