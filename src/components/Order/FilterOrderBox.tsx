@@ -30,7 +30,7 @@ function orderFilterReducer(state: OrderFilterState, action: OrderFilterAction):
 const FilterOrderBox :  React.FC<{ setFilteredOrders: React.Dispatch<React.SetStateAction<FilteredOrder[]>> }>= ( { setFilteredOrders } ) => {
   const [filterState, dispatch] = useReducer(orderFilterReducer, initialState);
   const [users, setUsers] = useState<UserLov[]>([]);
-  const { startLoading, stopLoading } = useContext(AppContext);
+  const { startLoading, stopLoading ,setModal1State} = useContext(AppContext);
   const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 
   useEffect(() => {
@@ -61,9 +61,26 @@ const FilterOrderBox :  React.FC<{ setFilteredOrders: React.Dispatch<React.SetSt
         },
         body: JSON.stringify(stateToUse),
       });
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+
       const data = await response.json();
-      setFilteredOrders(data);
+      if (Array.isArray(data)) {
+        setFilteredOrders(data as FilteredOrder[]);
+      } else {
+        console.error('Unexpected response format:', data);
+        setFilteredOrders([]);
+      }
     } catch (error) {
+      setModal1State({
+        isOpen: true,
+        title: 'Error',
+        message: 'An error occurred while filtering orders.',
+        okButtonText: 'Ok',
+        okButtonClick: () => setModal1State({ isOpen: false, title: '', message: '' }),
+      }); 
       console.error('Error filtering orders:', error);
     } finally {
       stopLoading();

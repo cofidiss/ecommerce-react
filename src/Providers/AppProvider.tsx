@@ -11,6 +11,7 @@ import CustomModal from "../components/CustomModal/CustomModal";
 import { initWebSocket } from "../services/websocketService";
 import { Client } from "@stomp/stompjs";
 import { IsLoggedIn } from "../services/authService";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -26,7 +27,7 @@ const theme = createTheme({
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loadingCount, setLoadingCount] = useState(0);
   const [userRoles, setUserRoles] = useState<UserRole[]>([]); 
-
+  const navigate = useNavigate();
   const socketRef = useRef<Client | null>(null);
 
   const [modal1State, setModal1State] = useState<CustomModalProps>({
@@ -69,7 +70,7 @@ const theme = createTheme({
   useEffect(() => {
     console.log('isLoggedIn' + isLoggedIn);
    if(isLoggedIn){
-  socketRef.current = initWebSocket(setModal2State);
+  socketRef.current = initWebSocket(setModal2State,navigate);
     }
    else {
     socketRef.current?.deactivate();

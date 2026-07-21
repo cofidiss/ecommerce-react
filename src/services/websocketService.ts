@@ -1,12 +1,12 @@
 import { Client } from "@stomp/stompjs";
 import { Dispatch, SetStateAction } from "react";
+import { NavigateFunction } from "react-router-dom";
 import { CustomModalProps } from "../Models/Models";
 
 
 
-export function initWebSocket (setModal2State: Dispatch<SetStateAction<CustomModalProps>>) : Client {
+export function initWebSocket (setModal2State: Dispatch<SetStateAction<CustomModalProps>>, navigate: NavigateFunction) : Client {
   const baseUrl = import.meta.env.VITE_APP_BASE_URL;
-
 
   // build ws(s) url from baseUrl
     const wsUrl = baseUrl.replace(/^http/, 'ws') + '/ws';
@@ -21,7 +21,7 @@ export function initWebSocket (setModal2State: Dispatch<SetStateAction<CustomMod
           setModal2State({
             isOpen: true,           
             title: msg.body,
-            okButtonClick: () => setModal2State({ isOpen: false }),
+            okButtonClick: () => { setModal2State({ isOpen: false }); navigate('/'); },
             okButtonText:"Ok"
           });
         });
