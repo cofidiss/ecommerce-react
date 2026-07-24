@@ -110,7 +110,7 @@ const FilteredOrderList: React.FC<{ filteredOrders: FilteredOrder[] }> = ({ filt
                 <TableRow key={order.orderId} hover>
                   <TableCell>{order.orderId}</TableCell>
                   <TableCell>{order.userName}</TableCell>
-                  <TableCell>{order.orderAmount}</TableCell>
+                  <TableCell>{order.orderAmount} ₺</TableCell>
                   <TableCell>
                     <IconButton
                       color="primary"

@@ -112,7 +112,7 @@ const OrderDetail: React.FC<{ orderId: number }> = ({ orderId }) => {
                   <TableCell>{item.userName}</TableCell>
                   <TableCell>{item.productId}</TableCell>
                   <TableCell>{item.quantity}</TableCell>
-                  <TableCell>{item.amount}</TableCell>
+                  <TableCell>{item.amount} ₺</TableCell>
                 </TableRow>
               ))
             )}

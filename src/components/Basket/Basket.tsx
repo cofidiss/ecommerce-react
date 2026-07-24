@@ -122,7 +122,7 @@ const handleOrder = () => {
   if (!basketItems?.length) {
     return (
       <div className={styles.basketEmpty}>
-        Sepetinizde ürün bulunmuyor.
+        No items in the basket. Please add products to your basket before proceeding to order.
       </div>
     );
   }
@@ -147,7 +147,7 @@ const handleOrder = () => {
                   onClick={() => deleteItem(item.productId)}
                   className={styles.deleteButton}
                 >
-                  Sil
+                  Delete
                 </button>
               </td>
               <td className={styles.cell}>{item.productId}</td>
