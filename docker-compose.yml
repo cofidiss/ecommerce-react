@@ -1,0 +1,8 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: ecommerce-react:latest
+    ports:
+      - "5173:80"
