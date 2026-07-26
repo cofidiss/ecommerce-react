@@ -1,73 +1,157 @@
-# React + TypeScript + Vite
+# E-Commerce React Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern e-commerce frontend built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+This project provides a complete client-side experience for:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- user authentication (login and signup)
+- product browsing and filtering
+- basket management
+- order creation and order history
+- real-time order notifications over WebSocket
 
-## React Compiler
+It is designed to work with a backend API (REST + STOMP WebSocket).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Authentication
+  - Login and signup screens
+  - Role-aware behavior (admin vs. standard user)
+- Product flow
+  - Product filtering by name, category, and price range
+  - Product table with sorting and pagination
+  - Add-to-basket action
+- Basket flow
+  - View current basket items
+  - Remove items
+  - Create order from basket
+- Order flow
+  - Admin: filter all orders by user and amount
+  - Standard user: view own orders
+  - View order details in modal dialog
+- Global UX utilities
+  - Central loading backdrop
+  - Reusable modal system for feedback and detail views
+  - Top navigation integrated with auth state
+- Real-time updates
+  - STOMP over WebSocket connection
+  - Subscribes to order creation events and shows notifications
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React 19
+- TypeScript
+- Vite
+- Material UI (MUI) + Emotion
+- React Router
+- STOMP.js (WebSocket messaging)
+- Day.js and MUI Date Pickers
+- ESLint
+- Docker + Nginx (production image)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+src/
+  components/
+    Basket/
+    FilterProduct/
+    FilterProductBox/
+    FilteredProductList/
+    Login/
+    Navbar/
+    Order/
+    SignUp/
+    Welcome/
+  Contexts/
+  Models/
+  Providers/
+  services/
+  styles/
+  Utils/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Prerequisites
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Node.js 20+ (recommended)
+- npm 9+
+- Docker (optional, for containerized run)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+VITE_APP_BASE_URL=http://localhost:8080
+VITE_API_BASE_URL=http://localhost:8080
 ```
+
+Notes:
+
+- `VITE_APP_BASE_URL` is used across most components/services.
+- `VITE_API_BASE_URL` is used in the app provider auth check.
+- In a typical setup, both point to the same backend base URL.
+
+## Getting Started (Local)
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Start development server:
+
+```bash
+npm run dev
+```
+
+3. Open the app in your browser:
+
+```text
+http://localhost:5173
+```
+
+## Available Scripts
+
+- `npm run dev`: Run Vite dev server
+- `npm run build`: Type-check and create production build
+- `npm run preview`: Preview production build locally
+- `npm run lint`: Run ESLint
+
+## Docker
+
+Build and run with Docker Compose:
+
+```bash
+docker compose up --build
+```
+
+Then open:
+
+```text
+http://localhost:5173
+```
+
+The container serves the production build using Nginx.
+
+## Backend Expectations
+
+The frontend expects these backend capabilities:
+
+- REST endpoints for user, product, basket, and order operations
+- Session/auth handling for login state checks
+- WebSocket endpoint at `/ws`
+- STOMP topic subscription at `/topic/orderCreated`
+
+## Roadmap Ideas
+
+- Add unit/integration tests (Vitest + React Testing Library)
+- Improve API error handling consistency
+- Add i18n support
+- Add CI workflow for lint/build checks
+
+## License
+
+No license file is currently included in this repository.
+Add a `LICENSE` file if you plan to publish this project publicly.
